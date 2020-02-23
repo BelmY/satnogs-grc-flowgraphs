@@ -1,6 +1,6 @@
-# SatNOGS Flographs #
+# SatNOGS Flowgraphs
 
-SatNOGS GNU Radio flographs.
+SatNOGS GNU Radio flowgraphs.
 
 
 ## License ##
