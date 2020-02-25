@@ -27,7 +27,6 @@ project(satnogs-flowgraphs )
 find_package(PythonLibs 3)
 find_package(Gnuradio "3.8" REQUIRED 
              COMPONENTS runtime blocks fft analog filter digital pmt)
-include(GrVersion)
 
 # gr-soapy and gr-satnogs are also required for the compilation
 find_package(soapy REQUIRED)
