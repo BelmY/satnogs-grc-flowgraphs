@@ -1,0 +1,27 @@
+Source: satnogs-flowgraphs
+Section: science
+Priority: optional
+Maintainer: SatNOGS project <dev@satnogs.org>
+Build-Depends: debhelper (>= 11~),
+Build-Depends-Indep: dh-python,
+                     python3-all,
+                     cmake,
+                     pkg-config,
+                     gnuradio (>= 3.8), gnuradio (<< 3.9),
+                     gr-satnogs (>= 2), gr-satnogs (<< 3),
+                     gr-soapy (>= 2), gr-soapy (<< 3)
+Standards-Version: 4.2.1
+Homepage: https://gitlab.com/librespacefoundation/satnogs/satnogs-flowgraphs
+Vcs-Git: https://gitlab.com/librespacefoundation/satnogs/satnogs-flowgraphs.git
+Vcs-Browser: https://gitlab.com/librespacefoundation/satnogs/satnogs-flowgraphs
+
+Package: satnogs-flowgraphs
+Architecture: all
+Pre-Depends: ${misc:Pre-Depends}
+Depends: gnuradio (>= 3.8), gnuradio (<< 3.9),
+         gr-satnogs (>= 2), gr-satnogs (<< 3),
+         gr-soapy (>= 2), gr-soapy (<< 3),
+         ${python3:Depends},
+         ${misc:Depends}
+Description: SatNOGS GNU Radio Flowgraphs
+ GNU Radio flowgraphs to be used for decoding signals for SatNOGS.
