@@ -23,23 +23,23 @@ set(flowgraphs
     noaa_apt_decoder.grc
     reaktor_hello_world_fsk9600_decoder.grc
 )
-message("Compiling GRC SatNOGS satellite specific flowgraphs…")
+
 foreach(grc_file ${flowgraphs})
-    message("Compiling " ${grc_file})
-    execute_process(COMMAND grcc ${grc_file} -o ${CMAKE_CURRENT_BINARY_DIR}
-                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                    RESULT_VARIABLE ret
+    get_filename_component(fname ${grc_file} NAME_WE)
+    add_custom_command(OUTPUT "satnogs_${fname}.py"
+        COMMAND grcc ${grc_file} -o ${CMAKE_CURRENT_BINARY_DIR}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        DEPENDS ${grc_file}
     )
-
-    if(NOT (ret STREQUAL "0") )
-        message(FATAL_ERROR "grcc failed to compile ${grc_file}")
-    endif()
+    
+    add_custom_target(${fname} ALL  DEPENDS "satnogs_${fname}.py")
+    list(APPEND generated_flowgraphs 
+        "${CMAKE_CURRENT_BINARY_DIR}/satnogs_${fname}.py"
+    )
 endforeach()
-
+    
 install(
     PROGRAMS
-    ${CMAKE_CURRENT_BINARY_DIR}/satnogs_amsat_fox_duv_decoder.py
-    ${CMAKE_CURRENT_BINARY_DIR}/satnogs_noaa_apt_decoder.py
-    ${CMAKE_CURRENT_BINARY_DIR}/satnogs_reaktor_hello_world_fsk9600_decoder.py
+    ${generated_flowgraphs}
     DESTINATION bin
 )

@@ -27,27 +27,23 @@ set(flowgraphs
     iq_receiver.grc
     sstv_pd120_demod.grc
 )
-message("Compiling GRC SatNOGS flowgraphs…")
+
 foreach(grc_file ${flowgraphs})
-    message("Compiling " ${grc_file})
-    execute_process(COMMAND grcc ${grc_file} -o ${CMAKE_CURRENT_BINARY_DIR}
-                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                    RESULT_VARIABLE ret
+    get_filename_component(fname ${grc_file} NAME_WE)
+    add_custom_command(OUTPUT "satnogs_${fname}.py"
+        COMMAND grcc ${grc_file} -o ${CMAKE_CURRENT_BINARY_DIR}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        DEPENDS ${grc_file}
     )
-
-    if(NOT (ret STREQUAL "0") )
-        message(FATAL_ERROR "grcc failed to compile ${grc_file}")
-    endif()
+    
+    add_custom_target(${fname} ALL  DEPENDS "satnogs_${fname}.py")
+    list(APPEND generated_flowgraphs 
+        "${CMAKE_CURRENT_BINARY_DIR}/satnogs_${fname}.py"
+    )
 endforeach()
-
+    
 install(
     PROGRAMS
-    ${CMAKE_CURRENT_BINARY_DIR}/satnogs_afsk1200_ax25.py
-    ${CMAKE_CURRENT_BINARY_DIR}/satnogs_bpsk_ax25.py
-    ${CMAKE_CURRENT_BINARY_DIR}/satnogs_cw_decoder.py
-    ${CMAKE_CURRENT_BINARY_DIR}/satnogs_example_flowgraph.py
-    ${CMAKE_CURRENT_BINARY_DIR}/satnogs_fsk_ax25.py
-    ${CMAKE_CURRENT_BINARY_DIR}/satnogs_iq_receiver.py
-    ${CMAKE_CURRENT_BINARY_DIR}/satnogs_sstv_pd120_demod.py
+    ${generated_flowgraphs}
     DESTINATION bin
 )

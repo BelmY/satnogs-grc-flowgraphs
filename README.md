@@ -28,7 +28,7 @@ git clone https://gitlab.com/librespacefoundation/satnogs/satnogs-flowgraphs.git
 mkdir build
 cd build
 cmake ..
-# make  # (unusual, but this step is *not* required in this project at the moment)
+make
 sudo make install
 ```
 
