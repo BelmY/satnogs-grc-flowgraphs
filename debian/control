@@ -5,6 +5,7 @@ Maintainer: SatNOGS project <dev@satnogs.org>
 Build-Depends: debhelper (>= 11~),
 Build-Depends-Indep: dh-python,
                      python3-all,
+                     python3-six,
                      cmake,
                      pkg-config,
                      gnuradio-dev (>= 3.8), gnuradio-dev (<< 3.9),
