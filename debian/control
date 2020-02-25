@@ -7,7 +7,7 @@ Build-Depends-Indep: dh-python,
                      python3-all,
                      cmake,
                      pkg-config,
-                     gnuradio (>= 3.8), gnuradio (<< 3.9),
+                     gnuradio-dev (>= 3.8), gnuradio-dev (<< 3.9),
                      gr-satnogs (>= 2), gr-satnogs (<< 3),
                      gr-soapy (>= 2), gr-soapy (<< 3)
 Standards-Version: 4.2.1
