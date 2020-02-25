@@ -25,7 +25,7 @@ debian:
       }
     - gbp buildpackage -us -uc --git-upstream-tag='HEAD' --git-ignore-branch --git-ignore-new
     - mkdir artifacts
-    - cp -a ../*.{deb,dsc,build,buildinfo,changes,orig.tar.gz} artifacts/
+    - cp -a ../*.{deb,diff.gz,dsc,build,buildinfo,changes,orig.tar.gz} artifacts/
   artifacts:
     expire_in: 1 week
     when: always
@@ -60,8 +60,8 @@ deploy:
       [ -d "$PROJECT" ] || osc co "$PROJECT"
       cd "$PROJECT"
       [ -d "$PACKAGE" ] || osc mkpac "$PACKAGE"
-      rm -f "$PACKAGE"/*.{dsc,orig.tar.gz}
-      cp -a "$ARTIFACTS_DIR"/*.{dsc,orig.tar.gz} "$PACKAGE"
+      rm -f "$PACKAGE"/*.{dsc,diff.gz,orig.tar.gz}
+      cp -a "$ARTIFACTS_DIR"/*.{dsc,diff.gz,orig.tar.gz} "$PACKAGE"
       osc addremove -r
       osc ci -m "$DSC_FILENAME"
       cd "$BASE_DIR"
