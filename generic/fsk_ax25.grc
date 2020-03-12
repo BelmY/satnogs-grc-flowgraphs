@@ -41,7 +41,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1472, 20.0]
+    coordinate: [1616, 12.0]
     rotation: 0
     state: enabled
 - name: decimation
@@ -53,7 +53,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1248, 12.0]
+    coordinate: [1760, 12.0]
     rotation: 0
     state: true
 - name: variable_ax25_decoder_0
@@ -70,7 +70,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1216, 788.0]
+    coordinate: [1216, 860.0]
     rotation: 0
     state: enabled
 - name: variable_ax25_decoder_0_0
@@ -87,7 +87,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1392, 788.0]
+    coordinate: [1392, 860.0]
     rotation: 0
     state: enabled
 - name: analog_quadrature_demod_cf_0_0
@@ -103,7 +103,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1280, 524.0]
+    coordinate: [1280, 596.0]
     rotation: 0
     state: enabled
 - name: analog_quadrature_demod_cf_0_0_0
@@ -119,7 +119,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [576, 388.0]
+    coordinate: [576, 460.0]
     rotation: 0
     state: enabled
 - name: analog_quadrature_demod_cf_0_0_0_0
@@ -135,7 +135,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [496, 524.0]
+    coordinate: [496, 596.0]
     rotation: 0
     state: enabled
 - name: antenna
@@ -152,7 +152,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [968, 12.0]
+    coordinate: [904, 12.0]
     rotation: 0
     state: enabled
 - name: baudrate
@@ -169,7 +169,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1352, 12.0]
+    coordinate: [1496, 12.0]
     rotation: 0
     state: enabled
 - name: blocks_delay_0
@@ -188,7 +188,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [536, 452.0]
+    coordinate: [536, 524.0]
     rotation: 0
     state: enabled
 - name: blocks_moving_average_xx_0
@@ -208,7 +208,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [648, 500.0]
+    coordinate: [648, 572.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_xx_0
@@ -226,7 +226,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [968, 456.0]
+    coordinate: [968, 528.0]
     rotation: 0
     state: enabled
 - name: blocks_vco_c_0
@@ -244,7 +244,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [800, 508.0]
+    coordinate: [800, 580.0]
     rotation: 0
     state: enabled
 - name: bw
@@ -263,7 +263,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1120, 12.0]
+    coordinate: [1344, 12.0]
     rotation: 0
     state: enabled
 - name: dc_blocker_xx_0
@@ -281,7 +281,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1624, 516.0]
+    coordinate: [1624, 588.0]
     rotation: 0
     state: enabled
 - name: dc_blocker_xx_0_0
@@ -299,7 +299,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [984, 380.0]
+    coordinate: [984, 452.0]
     rotation: 0
     state: enabled
 - name: decoded_data_file_path
@@ -333,7 +333,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 12.0]
+    coordinate: [448, 12.0]
     rotation: 0
     state: enabled
 - name: digital_binary_slicer_fb_0
@@ -348,7 +348,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1480, 680.0]
+    coordinate: [1480, 752.0]
     rotation: 180
     state: enabled
 - name: digital_clock_recovery_mm_xx_0
@@ -369,7 +369,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1608, 644.0]
+    coordinate: [1608, 716.0]
     rotation: 180
     state: enabled
 - name: doppler_correction_per_sec
@@ -427,7 +427,8 @@ blocks:
   id: parameter
   parameters:
     alias: ''
-    comment: ''
+    comment: "Generic gain value. \nEach Soapy module\nwill try to linearize this\n\
+      value by properly setting\nthe device specific gains."
     hide: none
     label: ''
     short_id: ''
@@ -437,7 +438,28 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1048, 12.0]
+    coordinate: [1176, 12.0]
+    rotation: 0
+    state: enabled
+- name: gain_mode
+  id: parameter
+  parameters:
+    alias: ''
+    comment: 'Set the gain mode of the Soapy.
+
+      Can be "Overall", "Specific"
+
+      or "Settings Field"'
+    hide: none
+    label: ''
+    short_id: ''
+    type: str
+    value: '"Overall"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1008, 12.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -486,7 +508,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [888, 12.0]
+    coordinate: [816, 12.0]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0
@@ -510,7 +532,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1104, 476.0]
+    coordinate: [1104, 548.0]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0_0
@@ -535,7 +557,24 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 476.0]
+    coordinate: [280, 548.0]
+    rotation: 0
+    state: enabled
+- name: other_settings
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Soapy Channel other settings
+    short_id: ''
+    type: str
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1664, 156.0]
     rotation: 0
     state: enabled
 - name: pfb_arb_resampler_xxx_1
@@ -556,7 +595,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 364.0]
+    coordinate: [752, 436.0]
     rotation: 0
     state: true
 - name: rigctl_port
@@ -590,7 +629,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [808, 12.0]
+    coordinate: [736, 12.0]
     rotation: 0
     state: enabled
 - name: samp_rate_rx
@@ -607,7 +646,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [656, 12.0]
+    coordinate: [584, 12.0]
     rotation: 0
     state: enabled
 - name: satnogs_doppler_compensation_0
@@ -628,7 +667,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [656, 132.0]
+    coordinate: [560, 220.0]
     rotation: 0
     state: true
 - name: satnogs_frame_decoder_0_0
@@ -646,7 +685,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1220, 638]
+    coordinate: [1216, 712.0]
     rotation: 180
     state: enabled
 - name: satnogs_frame_decoder_0_0_0
@@ -664,7 +703,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1216, 712.0]
+    coordinate: [1216, 784.0]
     rotation: 180
     state: enabled
 - name: satnogs_frame_file_sink_0_1_0
@@ -679,7 +718,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [816, 716.0]
+    coordinate: [816, 788.0]
     rotation: 180
     state: enabled
 - name: satnogs_iq_sink_0
@@ -696,7 +735,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 508.0]
+    coordinate: [40, 580.0]
     rotation: 180
     state: enabled
 - name: satnogs_json_converter_0
@@ -712,7 +751,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1040, 684.0]
+    coordinate: [1040, 756.0]
     rotation: 180
     state: true
 - name: satnogs_ogg_encoder_0
@@ -728,7 +767,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1152, 372.0]
+    coordinate: [1152, 444.0]
     rotation: 0
     state: enabled
 - name: satnogs_tcp_rigctl_msg_source_0
@@ -748,7 +787,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 244.0]
+    coordinate: [288, 372.0]
     rotation: 0
     state: enabled
 - name: satnogs_udp_msg_sink_0_0
@@ -764,7 +803,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [816, 636.0]
+    coordinate: [816, 708.0]
     rotation: 180
     state: enabled
 - name: satnogs_waterfall_sink_0
@@ -783,7 +822,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 316.0]
+    coordinate: [40, 388.0]
     rotation: 180
     state: enabled
 - name: soapy_rx_device
@@ -800,13 +839,15 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 12.0]
+    coordinate: [336, 12.0]
     rotation: 0
     state: enabled
 - name: soapy_source_0
   id: soapy_source
   parameters:
     affinity: ''
+    agc0: 'False'
+    agc1: 'False'
     alias: ''
     amp_gain0: '0'
     ant0: antenna
@@ -829,17 +870,14 @@ blocks:
     dc_offset_auto_mode1: 'False'
     dev: soapy_rx_device
     devname: custom
-    gain_auto_mode0: 'False'
-    gain_auto_mode1: 'False'
+    gain_mode0: gain_mode
+    gain_mode1: Overall
     ifgr_gain: '59'
     lna_gain0: '10'
     lna_gain1: '10'
-    manual_gain0: 'False'
-    manual_gain1: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
     mix_gain0: '10'
-    mix_gain1: '10'
     nchan: '1'
     nco_freq0: '0'
     nco_freq1: '0'
@@ -848,26 +886,65 @@ blocks:
     pga_gain0: '24'
     pga_gain1: '24'
     rfgr_gain: '9'
+    rxvga1_gain: '5'
+    rxvga2_gain: '0'
     samp_rate: samp_rate_rx
     sdrplay_agc_setpoint: '-30'
     sdrplay_biastee: 'True'
     sdrplay_dabnotch: 'False'
     sdrplay_if_mode: Zero-IF
     sdrplay_rfnotch: 'False'
+    settings0: other_settings
+    settings1: ''
+    stream_args: stream_args
     tia_gain0: '0'
     tia_gain1: '0'
+    tune_args0: tune_args
+    tune_args1: ''
     tuner_gain0: '10'
-    tuner_gain1: '10'
     type: fc32
     vga_gain0: '10'
-    vga_gain1: '10'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 108.0]
+    coordinate: [296, 180.0]
     rotation: 0
     state: true
+- name: stream_args
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Soapy Stream arguments
+    short_id: ''
+    type: str
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1320, 156.0]
+    rotation: 0
+    state: enabled
+- name: tune_args
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Soapy Channel Tune arguments
+    short_id: ''
+    type: str
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1496, 156.0]
+    rotation: 0
+    state: enabled
 - name: udp_IP
   id: parameter
   parameters:
@@ -912,7 +989,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [960, 164.0]
+    coordinate: [784, 260.0]
     rotation: 0
     state: true
 - name: virtual_source_0
@@ -925,7 +1002,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 452.0]
+    coordinate: [40, 524.0]
     rotation: 0
     state: true
 - name: waterfall_file_path

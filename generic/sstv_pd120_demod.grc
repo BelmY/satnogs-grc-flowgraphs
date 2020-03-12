@@ -41,7 +41,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1056, 12.0]
+    coordinate: [1272, 12.0]
     rotation: 0
     state: enabled
 - name: intermediate_samp_rate
@@ -142,7 +142,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [952, 12.0]
+    coordinate: [1168, 12.0]
     rotation: 0
     state: enabled
 - name: decoded_data_file_path
@@ -244,7 +244,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1176, 12.0]
+    coordinate: [1392, 12.0]
     rotation: 0
     state: enabled
 - name: freq_xlating_fir_filter_xxx_0_0
@@ -271,12 +271,34 @@ blocks:
   id: parameter
   parameters:
     alias: ''
-    comment: ''
+    comment: "Generic gain value. \nEach Soapy module\nwill try to linearize this\n\
+      value by properly setting\nthe device specific gains."
     hide: none
     label: ''
     short_id: ''
     type: eng_float
     value: '0.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1040, 12.0]
+    rotation: 0
+    state: enabled
+- name: gain_mode
+  id: parameter
+  parameters:
+    alias: ''
+    comment: 'Set the gain mode of the Soapy.
+
+      Can be "Overall", "Specific"
+
+      or "Settings Field"'
+    hide: none
+    label: ''
+    short_id: ''
+    type: str
+    value: '"Overall"'
   states:
     bus_sink: false
     bus_source: false
@@ -385,6 +407,23 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [1480, 500.0]
+    rotation: 0
+    state: enabled
+- name: other_settings
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Soapy Channel other settings
+    short_id: ''
+    type: str
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1544, 148.0]
     rotation: 0
     state: enabled
 - name: pfb_arb_resampler_xxx_0
@@ -497,7 +536,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [464, 132.0]
+    coordinate: [464, 140.0]
     rotation: 0
     state: true
 - name: satnogs_iq_sink_0_0
@@ -564,7 +603,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [208, 244.0]
+    coordinate: [216, 292.0]
     rotation: 0
     state: enabled
 - name: satnogs_waterfall_sink_0_0
@@ -607,6 +646,8 @@ blocks:
   id: soapy_source
   parameters:
     affinity: ''
+    agc0: 'False'
+    agc1: 'False'
     alias: ''
     amp_gain0: '0'
     ant0: antenna
@@ -629,17 +670,14 @@ blocks:
     dc_offset_auto_mode1: 'False'
     dev: soapy_rx_device
     devname: custom
-    gain_auto_mode0: 'False'
-    gain_auto_mode1: 'False'
+    gain_mode0: gain_mode
+    gain_mode1: Overall
     ifgr_gain: '59'
     lna_gain0: '10'
     lna_gain1: '10'
-    manual_gain0: 'False'
-    manual_gain1: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
     mix_gain0: '10'
-    mix_gain1: '10'
     nchan: '1'
     nco_freq0: '0'
     nco_freq1: '0'
@@ -648,26 +686,48 @@ blocks:
     pga_gain0: '24'
     pga_gain1: '24'
     rfgr_gain: '9'
+    rxvga1_gain: '5'
+    rxvga2_gain: '0'
     samp_rate: samp_rate_rx
     sdrplay_agc_setpoint: '-30'
     sdrplay_biastee: 'True'
     sdrplay_dabnotch: 'False'
     sdrplay_if_mode: Zero-IF
     sdrplay_rfnotch: 'False'
+    settings0: other_settings
+    settings1: ''
+    stream_args: stream_args
     tia_gain0: '0'
     tia_gain1: '0'
+    tune_args0: tune_args
+    tune_args1: ''
     tuner_gain0: '10'
-    tuner_gain1: '10'
     type: fc32
     vga_gain0: '10'
-    vga_gain1: '10'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [208, 108.0]
+    coordinate: [240, 104.0]
     rotation: 0
     state: true
+- name: stream_args
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Soapy Stream arguments
+    short_id: ''
+    type: str
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1192, 148.0]
+    rotation: 0
+    state: enabled
 - name: sync
   id: parameter
   parameters:
@@ -682,7 +742,24 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1264, 12.0]
+    coordinate: [1480, 12.0]
+    rotation: 0
+    state: enabled
+- name: tune_args
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Soapy Channel Tune arguments
+    short_id: ''
+    type: str
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1368, 148.0]
     rotation: 0
     state: enabled
 - name: udp_IP
@@ -729,7 +806,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 164.0]
+    coordinate: [688, 180.0]
     rotation: 0
     state: true
 - name: virtual_source_0

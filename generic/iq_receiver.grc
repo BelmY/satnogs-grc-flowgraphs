@@ -65,7 +65,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1120, 12.0]
+    coordinate: [1376, 12.0]
     rotation: 0
     state: enabled
 - name: dev_args
@@ -157,7 +157,8 @@ blocks:
   id: parameter
   parameters:
     alias: ''
-    comment: ''
+    comment: "Generic gain value. \nEach Soapy module\nwill try to linearize this\n\
+      value by properly setting\nthe device specific gains."
     hide: none
     label: ''
     short_id: ''
@@ -167,7 +168,28 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1048, 12.0]
+    coordinate: [1256, 12.0]
+    rotation: 0
+    state: enabled
+- name: gain_mode
+  id: parameter
+  parameters:
+    alias: ''
+    comment: 'Set the gain mode of the Soapy.
+
+      Can be "Overall", "Specific"
+
+      or "Settings Field"'
+    hide: none
+    label: ''
+    short_id: ''
+    type: str
+    value: '"Overall"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1096, 12.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -219,6 +241,23 @@ blocks:
     coordinate: [888, 12.0]
     rotation: 0
     state: enabled
+- name: other_settings
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Soapy Channel other settings
+    short_id: ''
+    type: str
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1648, 180.0]
+    rotation: 0
+    state: enabled
 - name: out_samp_rate
   id: parameter
   parameters:
@@ -233,7 +272,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1392, 12.0]
+    coordinate: [1536, 12.0]
     rotation: 0
     state: enabled
 - name: rigctl_port
@@ -305,7 +344,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [656, 220.0]
+    coordinate: [704, 188.0]
     rotation: 0
     state: true
 - name: satnogs_iq_sink_0
@@ -322,7 +361,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1104, 340.0]
+    coordinate: [1040, 324.0]
     rotation: 0
     state: enabled
 - name: satnogs_tcp_rigctl_msg_source_0
@@ -361,7 +400,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1104, 212.0]
+    coordinate: [1040, 188.0]
     rotation: 0
     state: enabled
 - name: soapy_rx_device
@@ -385,6 +424,8 @@ blocks:
   id: soapy_source
   parameters:
     affinity: ''
+    agc0: 'False'
+    agc1: 'False'
     alias: ''
     amp_gain0: '0'
     ant0: antenna
@@ -407,17 +448,14 @@ blocks:
     dc_offset_auto_mode1: 'False'
     dev: soapy_rx_device
     devname: custom
-    gain_auto_mode0: 'False'
-    gain_auto_mode1: 'False'
+    gain_mode0: gain_mode
+    gain_mode1: Overall
     ifgr_gain: '59'
     lna_gain0: '10'
     lna_gain1: '10'
-    manual_gain0: 'False'
-    manual_gain1: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
     mix_gain0: '10'
-    mix_gain1: '10'
     nchan: '1'
     nco_freq0: '0'
     nco_freq1: '0'
@@ -426,26 +464,65 @@ blocks:
     pga_gain0: '24'
     pga_gain1: '24'
     rfgr_gain: '9'
+    rxvga1_gain: '5'
+    rxvga2_gain: '0'
     samp_rate: samp_rate_rx
     sdrplay_agc_setpoint: '-30'
     sdrplay_biastee: 'True'
     sdrplay_dabnotch: 'False'
     sdrplay_if_mode: Zero-IF
     sdrplay_rfnotch: 'False'
+    settings0: other_settings
+    settings1: ''
+    stream_args: stream_args
     tia_gain0: '0'
     tia_gain1: '0'
+    tune_args0: tune_args
+    tune_args1: ''
     tuner_gain0: '10'
-    tuner_gain1: '10'
     type: fc32
     vga_gain0: '10'
-    vga_gain1: '10'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 196.0]
+    coordinate: [392, 148.0]
     rotation: 0
     state: true
+- name: stream_args
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Soapy Stream arguments
+    short_id: ''
+    type: str
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1312, 180.0]
+    rotation: 0
+    state: enabled
+- name: tune_args
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Soapy Channel Tune arguments
+    short_id: ''
+    type: str
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1488, 180.0]
+    rotation: 0
+    state: enabled
 - name: waterfall_file_path
   id: parameter
   parameters:
