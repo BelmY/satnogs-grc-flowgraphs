@@ -73,7 +73,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1376, 444.0]
+    coordinate: [1376, 516.0]
     rotation: 0
     state: true
 - name: analog_agc2_xx_0_0
@@ -94,7 +94,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 348.0]
+    coordinate: [616, 420.0]
     rotation: 0
     state: enabled
 - name: antenna
@@ -112,6 +112,23 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [880, 12.0]
+    rotation: 0
+    state: enabled
+- name: bb_freq
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Baseband CORDIC frequency (if the device supports it)
+    short_id: ''
+    type: eng_float
+    value: '0.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1928, 156.0]
     rotation: 0
     state: enabled
 - name: bfo_freq
@@ -132,7 +149,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1720, 12.0]
+    coordinate: [1728, 12.0]
     rotation: 0
     state: enabled
 - name: blocks_complex_to_real_0
@@ -148,7 +165,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1000, 384.0]
+    coordinate: [1000, 456.0]
     rotation: 0
     state: enabled
 - name: blocks_rotator_cc_0_0
@@ -164,7 +181,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [808, 380.0]
+    coordinate: [808, 452.0]
     rotation: 0
     state: enabled
 - name: bw
@@ -186,6 +203,23 @@ blocks:
     coordinate: [1232, 12.0]
     rotation: 0
     state: enabled
+- name: dc_removal
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Remove automatically the DC offset (if the device support it)
+    short_id: ''
+    type: str
+    value: '"False"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1776, 156.0]
+    rotation: 0
+    state: enabled
 - name: decoded_data_file_path
   id: parameter
   parameters:
@@ -200,7 +234,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [0, 748.0]
+    coordinate: [0, 820.0]
     rotation: 0
     state: enabled
 - name: dev_args
@@ -234,7 +268,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [160, 748.0]
+    coordinate: [160, 820.0]
     rotation: 0
     state: enabled
 - name: enable_iq_dump
@@ -251,7 +285,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [256, 668.0]
+    coordinate: [256, 740.0]
     rotation: 0
     state: enabled
 - name: file_path
@@ -268,7 +302,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [144, 668.0]
+    coordinate: [144, 740.0]
     rotation: 180
     state: enabled
 - name: gain
@@ -350,7 +384,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 668.0]
+    coordinate: [400, 740.0]
     rotation: 0
     state: enabled
 - name: lo_offset
@@ -370,25 +404,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [800, 12.0]
-    rotation: 0
-    state: enabled
-- name: ppm
-  id: parameter
-  parameters:
-    alias: ''
-    comment: 'The frequency correction in PPM
-
-      to correct for a local oscillator frequency deviation'
-    hide: none
-    label: ''
-    short_id: ''
-    type: eng_float
-    value: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1016, 20.0]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0_0
@@ -412,7 +427,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [432, 444.0]
+    coordinate: [432, 516.0]
     rotation: 0
     state: enabled
 - name: other_settings
@@ -432,6 +447,25 @@ blocks:
     coordinate: [1624, 156.0]
     rotation: 0
     state: enabled
+- name: ppm
+  id: parameter
+  parameters:
+    alias: ''
+    comment: 'The frequency correction in PPM
+
+      to correct for a local oscillator frequency deviation'
+    hide: none
+    label: ''
+    short_id: ''
+    type: eng_float
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1952, 4.0]
+    rotation: 0
+    state: enabled
 - name: rational_resampler_xxx_0
   id: rational_resampler_xxx
   parameters:
@@ -449,7 +483,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 468.0]
+    coordinate: [616, 540.0]
     rotation: 0
     state: true
 - name: rigctl_port
@@ -466,7 +500,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 748.0]
+    coordinate: [400, 820.0]
     rotation: 0
     state: enabled
 - name: rx_freq
@@ -521,7 +555,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [568, 148.0]
+    coordinate: [568, 204.0]
     rotation: 0
     state: true
 - name: satnogs_frame_decoder_0
@@ -539,7 +573,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [800, 496.0]
+    coordinate: [800, 568.0]
     rotation: 0
     state: true
 - name: satnogs_frame_file_sink_0_0
@@ -554,7 +588,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1208, 564.0]
+    coordinate: [1208, 636.0]
     rotation: 0
     state: enabled
 - name: satnogs_iq_sink_0
@@ -571,7 +605,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 548.0]
+    coordinate: [40, 620.0]
     rotation: 180
     state: enabled
 - name: satnogs_json_converter_0
@@ -587,7 +621,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1016, 508.0]
+    coordinate: [1016, 580.0]
     rotation: 0
     state: enabled
 - name: satnogs_ogg_encoder_0
@@ -603,7 +637,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1144, 364.0]
+    coordinate: [1144, 436.0]
     rotation: 0
     state: enabled
 - name: satnogs_tcp_rigctl_msg_source_0
@@ -623,7 +657,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 292.0]
+    coordinate: [320, 388.0]
     rotation: 0
     state: enabled
 - name: satnogs_udp_msg_sink_0_0
@@ -639,7 +673,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1208, 476.0]
+    coordinate: [1208, 548.0]
     rotation: 0
     state: enabled
 - name: satnogs_waterfall_sink_0
@@ -658,7 +692,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 356.0]
+    coordinate: [40, 428.0]
     rotation: 180
     state: enabled
 - name: soapy_rx_device
@@ -702,8 +736,8 @@ blocks:
     correction1: '0'
     dc_offset0: '0'
     dc_offset1: '0'
-    dc_offset_auto_mode0: 'False'
-    dc_offset_auto_mode1: 'False'
+    dc_removal0: dc_removal
+    dc_removal1: 'True'
     dev: soapy_rx_device
     devname: custom
     gain_mode0: gain_mode
@@ -715,7 +749,7 @@ blocks:
     minoutbuf: '0'
     mix_gain0: '10'
     nchan: '1'
-    nco_freq0: '0'
+    nco_freq0: bb_freq
     nco_freq1: '0'
     overall_gain0: gain
     overall_gain1: '10'
@@ -744,7 +778,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [328, 108.0]
+    coordinate: [312, 132.0]
     rotation: 0
     state: true
 - name: stream_args
@@ -795,7 +829,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [496, 668.0]
+    coordinate: [496, 740.0]
     rotation: 0
     state: enabled
 - name: udp_port
@@ -812,7 +846,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [496, 748.0]
+    coordinate: [496, 820.0]
     rotation: 0
     state: enabled
 - name: virtual_sink_0
@@ -825,7 +859,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 188.0]
+    coordinate: [752, 244.0]
     rotation: 0
     state: true
 - name: virtual_source_0
@@ -838,7 +872,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 492.0]
+    coordinate: [40, 564.0]
     rotation: 0
     state: true
 - name: waterfall_file_path
@@ -855,7 +889,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [0, 668.0]
+    coordinate: [0, 740.0]
     rotation: 0
     state: enabled
 - name: wpm
@@ -872,7 +906,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1432, 12.0]
+    coordinate: [1416, 12.0]
     rotation: 0
     state: enabled
 

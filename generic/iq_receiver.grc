@@ -49,6 +49,23 @@ blocks:
     coordinate: [968, 12.0]
     rotation: 0
     state: enabled
+- name: bb_freq
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Baseband CORDIC frequency (if the device supports it)
+    short_id: ''
+    type: eng_float
+    value: '0.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1952, 180.0]
+    rotation: 0
+    state: enabled
 - name: bw
   id: parameter
   parameters:
@@ -66,6 +83,23 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [1376, 12.0]
+    rotation: 0
+    state: enabled
+- name: dc_removal
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Remove automatically the DC offset (if the device support it)
+    short_id: ''
+    type: str
+    value: '"False"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1800, 180.0]
     rotation: 0
     state: enabled
 - name: dev_args
@@ -241,25 +275,6 @@ blocks:
     coordinate: [888, 12.0]
     rotation: 0
     state: enabled
-- name: ppm
-  id: parameter
-  parameters:
-    alias: ''
-    comment: 'The frequency correction in PPM
-
-      to correct for a local oscillator frequency deviation'
-    hide: none
-    label: ''
-    short_id: ''
-    type: eng_float
-    value: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1016, 20.0]
-    rotation: 0
-    state: enabled
 - name: other_settings
   id: parameter
   parameters:
@@ -292,6 +307,25 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [1536, 12.0]
+    rotation: 0
+    state: enabled
+- name: ppm
+  id: parameter
+  parameters:
+    alias: ''
+    comment: 'The frequency correction in PPM
+
+      to correct for a local oscillator frequency deviation'
+    hide: none
+    label: ''
+    short_id: ''
+    type: eng_float
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1688, 12.0]
     rotation: 0
     state: enabled
 - name: rigctl_port
@@ -400,7 +434,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 332.0]
+    coordinate: [384, 356.0]
     rotation: 0
     state: enabled
 - name: satnogs_waterfall_sink_0
@@ -463,8 +497,8 @@ blocks:
     correction1: '0'
     dc_offset0: '0'
     dc_offset1: '0'
-    dc_offset_auto_mode0: 'False'
-    dc_offset_auto_mode1: 'False'
+    dc_removal0: dc_removal
+    dc_removal1: 'True'
     dev: soapy_rx_device
     devname: custom
     gain_mode0: gain_mode
@@ -476,7 +510,7 @@ blocks:
     minoutbuf: '0'
     mix_gain0: '10'
     nchan: '1'
-    nco_freq0: '0'
+    nco_freq0: bb_freq
     nco_freq1: '0'
     overall_gain0: gain
     overall_gain1: '10'
@@ -505,7 +539,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 148.0]
+    coordinate: [376, 116.0]
     rotation: 0
     state: true
 - name: stream_args

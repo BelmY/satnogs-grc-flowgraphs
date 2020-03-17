@@ -126,6 +126,23 @@ blocks:
     coordinate: [792, 12.0]
     rotation: 0
     state: enabled
+- name: bb_freq
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Baseband CORDIC frequency (if the device supports it)
+    short_id: ''
+    type: eng_float
+    value: '0.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1840, 148.0]
+    rotation: 0
+    state: enabled
 - name: bw
   id: parameter
   parameters:
@@ -143,6 +160,23 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [1168, 12.0]
+    rotation: 0
+    state: enabled
+- name: dc_removal
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Remove automatically the DC offset (if the device support it)
+    short_id: ''
+    type: str
+    value: '"False"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1680, 148.0]
     rotation: 0
     state: enabled
 - name: decoded_data_file_path
@@ -360,25 +394,6 @@ blocks:
     coordinate: [704, 12.0]
     rotation: 0
     state: enabled
-- name: ppm
-  id: parameter
-  parameters:
-    alias: ''
-    comment: 'The frequency correction in PPM
-
-      to correct for a local oscillator frequency deviation'
-    hide: none
-    label: ''
-    short_id: ''
-    type: eng_float
-    value: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1016, 20.0]
-    rotation: 0
-    state: enabled
 - name: low_pass_filter_0_0
   id: low_pass_filter
   parameters:
@@ -442,7 +457,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1544, 148.0]
+    coordinate: [1528, 148.0]
     rotation: 0
     state: enabled
 - name: pfb_arb_resampler_xxx_0
@@ -466,6 +481,25 @@ blocks:
     coordinate: [728, 380.0]
     rotation: 0
     state: true
+- name: ppm
+  id: parameter
+  parameters:
+    alias: ''
+    comment: 'The frequency correction in PPM
+
+      to correct for a local oscillator frequency deviation'
+    hide: none
+    label: ''
+    short_id: ''
+    type: eng_float
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1560, 12.0]
+    rotation: 0
+    state: enabled
 - name: rational_resampler_xxx_0
   id: rational_resampler_xxx
   parameters:
@@ -555,7 +589,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [464, 140.0]
+    coordinate: [528, 180.0]
     rotation: 0
     state: true
 - name: satnogs_iq_sink_0_0
@@ -622,7 +656,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [216, 292.0]
+    coordinate: [248, 348.0]
     rotation: 0
     state: enabled
 - name: satnogs_waterfall_sink_0_0
@@ -685,8 +719,8 @@ blocks:
     correction1: '0'
     dc_offset0: '0'
     dc_offset1: '0'
-    dc_offset_auto_mode0: 'False'
-    dc_offset_auto_mode1: 'False'
+    dc_removal0: dc_removal
+    dc_removal1: 'True'
     dev: soapy_rx_device
     devname: custom
     gain_mode0: gain_mode
@@ -698,7 +732,7 @@ blocks:
     minoutbuf: '0'
     mix_gain0: '10'
     nchan: '1'
-    nco_freq0: '0'
+    nco_freq0: bb_freq
     nco_freq1: '0'
     overall_gain0: gain
     overall_gain1: '10'
@@ -727,7 +761,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 104.0]
+    coordinate: [240, 108.0]
     rotation: 0
     state: true
 - name: stream_args
@@ -825,7 +859,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [688, 180.0]
+    coordinate: [736, 220.0]
     rotation: 0
     state: true
 - name: virtual_source_0

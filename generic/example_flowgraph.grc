@@ -142,6 +142,23 @@ blocks:
     coordinate: [1472, 28.0]
     rotation: 0
     state: enabled
+- name: bb_freq
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Baseband CORDIC frequency (if the device supports it)
+    short_id: ''
+    type: eng_float
+    value: '0.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2064, 188.0]
+    rotation: 0
+    state: enabled
 - name: bw
   id: parameter
   parameters:
@@ -177,6 +194,23 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [1144, 300.0]
+    rotation: 0
+    state: enabled
+- name: dc_removal
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Remove automatically the DC offset (if the device support it)
+    short_id: ''
+    type: str
+    value: '"False"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1904, 188.0]
     rotation: 0
     state: enabled
 - name: decoded_data_file_path
@@ -339,6 +373,23 @@ blocks:
     coordinate: [768, 28.0]
     rotation: 0
     state: enabled
+- name: other_settings
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Soapy Channel other settings
+    short_id: ''
+    type: str
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1744, 188.0]
+    rotation: 0
+    state: enabled
 - name: ppm
   id: parameter
   parameters:
@@ -355,24 +406,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1016, 20.0]
-    rotation: 0
-    state: enabled
-- name: other_settings
-  id: parameter
-  parameters:
-    alias: ''
-    comment: ''
-    hide: none
-    label: Soapy Channel other settings
-    short_id: ''
-    type: str
-    value: '""'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1888, 100.0]
+    coordinate: [1992, 12.0]
     rotation: 0
     state: enabled
 - name: rigctl_port
@@ -444,7 +478,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [528, 164.0]
+    coordinate: [528, 188.0]
     rotation: 0
     state: true
 - name: satnogs_iq_sink_0
@@ -497,7 +531,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [216, 308.0]
+    coordinate: [216, 364.0]
     rotation: 0
     state: enabled
 - name: satnogs_waterfall_sink_0
@@ -560,8 +594,8 @@ blocks:
     correction1: '0'
     dc_offset0: '0'
     dc_offset1: '0'
-    dc_offset_auto_mode0: 'False'
-    dc_offset_auto_mode1: 'False'
+    dc_removal0: dc_removal
+    dc_removal1: 'True'
     dev: soapy_rx_device
     devname: custom
     gain_mode0: gain_mode
@@ -573,7 +607,7 @@ blocks:
     minoutbuf: '0'
     mix_gain0: '10'
     nchan: '1'
-    nco_freq0: '0'
+    nco_freq0: bb_freq
     nco_freq1: '0'
     overall_gain0: gain
     overall_gain1: '10'
@@ -602,7 +636,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 124.0]
+    coordinate: [208, 116.0]
     rotation: 0
     state: true
 - name: stream_args
@@ -619,7 +653,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1552, 100.0]
+    coordinate: [1408, 188.0]
     rotation: 0
     state: enabled
 - name: tune_args
@@ -636,7 +670,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1728, 100.0]
+    coordinate: [1584, 188.0]
     rotation: 0
     state: enabled
 - name: udp_IP
@@ -683,7 +717,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [808, 204.0]
+    coordinate: [744, 228.0]
     rotation: 0
     state: true
 - name: virtual_source_0
