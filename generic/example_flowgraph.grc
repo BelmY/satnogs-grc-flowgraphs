@@ -339,6 +339,25 @@ blocks:
     coordinate: [768, 28.0]
     rotation: 0
     state: enabled
+- name: ppm
+  id: parameter
+  parameters:
+    alias: ''
+    comment: 'The frequency correction in PPM
+
+      to correct for a local oscillator frequency deviation'
+    hide: none
+    label: ''
+    short_id: ''
+    type: eng_float
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1016, 20.0]
+    rotation: 0
+    state: enabled
 - name: other_settings
   id: parameter
   parameters:
@@ -537,7 +556,7 @@ blocks:
     clock_rate: '0'
     clock_source: ''
     comment: ''
-    correction0: '0'
+    correction0: ppm
     correction1: '0'
     dc_offset0: '0'
     dc_offset1: '0'
