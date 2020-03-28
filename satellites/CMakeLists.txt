@@ -20,6 +20,7 @@
 
 set(flowgraphs
     amsat_fox_duv_decoder.grc
+    argos_bpsk_ldr.grc
     noaa_apt_decoder.grc
     reaktor_hello_world_fsk9600_decoder.grc
 )
