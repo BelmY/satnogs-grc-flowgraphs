@@ -718,7 +718,7 @@ blocks:
     minoutbuf: '0'
     samp_rate: baudrate*decimation
     type: fir_filter_ccf
-    width: baudrate / 10.0
+    width: baudrate / 4.0
     win: firdes.WIN_HAMMING
   states:
     bus_sink: false
