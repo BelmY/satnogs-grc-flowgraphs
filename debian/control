@@ -20,7 +20,7 @@ Package: satnogs-flowgraphs
 Architecture: all
 Pre-Depends: ${misc:Pre-Depends}
 Depends: gnuradio (>= 3.8), gnuradio (<< 3.9),
-         gr-satnogs (>= 2.0), gr-satnogs (<< 2.1),
+         gr-satnogs (>= 2.1), gr-satnogs (<< 2.2),
          gr-soapy (>= 2.1), gr-soapy (<< 2.2),
          ${python3:Depends},
          ${misc:Depends}
