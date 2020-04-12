@@ -20,10 +20,10 @@
 
 set(flowgraphs
     afsk1200_ax25.grc
-    bpsk_ax25.grc
+    bpsk.grc
     cw_decoder.grc
     example_flowgraph.grc
-    fsk_ax25.grc
+    fsk.grc
     iq_receiver.grc
     sstv_pd120_demod.grc
 )

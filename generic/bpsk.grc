@@ -1,16 +1,16 @@
 options:
   parameters:
-    author: Manolis Surligas (surligas@gmail.com)
+    author: Manolis Surligas (surligas@gmail.com), Patrick Dohmen (DL4PD)
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
     copyright: ''
-    description: Generic FSK/MSK AX.25 decoder
+    description: BPSK decoder
     gen_cmake: 'On'
     gen_linking: dynamic
     generate_options: no_gui
     hier_block_src_path: '.:'
-    id: satnogs_fsk_ax25
+    id: satnogs_bpsk
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -21,13 +21,13 @@ options:
     run_options: run
     sizing_mode: fixed
     thread_safe_setters: ''
-    title: satnogs_fsk_ax25
+    title: satnogs_bpsk
     window_size: 2*1080,1080
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 4.0]
+    coordinate: [8, 20]
     rotation: 0
     state: enabled
 
@@ -41,21 +41,91 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1616, 12.0]
+    coordinate: [1448, 20.0]
+    rotation: 0
+    state: enabled
+- name: available_framings
+  id: variable
+  parameters:
+    comment: 'Dictionary holding all the available framing schemes.
+
+      Currently supported:
+
+      * AX.25 (key: ax25)'
+    value: '{''ax25'':variable_ax25_decoder_0}'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [40, 1108.0]
+    rotation: 0
+    state: enabled
+- name: bpsk_constellation
+  id: variable_constellation
+  parameters:
+    comment: ''
+    const_points: '[-1-1j, -1+1j, 1+1j, 1-1j]'
+    dims: '1'
+    precision: '8'
+    rot_sym: '4'
+    soft_dec_lut: None
+    sym_map: '[0, 1, 3, 2]'
+    type: bpsk
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [624, 964.0]
     rotation: 0
     state: enabled
 - name: decimation
   id: variable
   parameters:
     comment: ''
-    value: max(4,satnogs.find_decimation(baudrate, 2, audio_samp_rate))
+    value: satnogs.find_decimation(baudrate, 2, audio_samp_rate,sps)
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1760, 12.0]
+    coordinate: [1280, 20.0]
     rotation: 0
     state: true
+- name: nfilts
+  id: variable
+  parameters:
+    comment: ''
+    value: '32'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 828.0]
+    rotation: 0
+    state: enabled
+- name: rrc_taps
+  id: variable
+  parameters:
+    comment: ''
+    value: firdes.root_raised_cosine(nfilts, nfilts, 1.0/float(sps), excess_bw, 11*sps*nfilts)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [872, 828.0]
+    rotation: 0
+    state: enabled
+- name: sps
+  id: variable
+  parameters:
+    comment: ''
+    value: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [688, 828.0]
+    rotation: 0
+    state: enabled
 - name: variable_ax25_decoder_0
   id: variable_ax25_decoder
   parameters:
@@ -70,72 +140,49 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1216, 860.0]
+    coordinate: [40, 1236.0]
     rotation: 0
     state: enabled
-- name: variable_ax25_decoder_0_0
-  id: variable_ax25_decoder
-  parameters:
-    addr: '''GND'''
-    comment: ''
-    crc_check: 'True'
-    descrambling: 'False'
-    frame_len: '1024'
-    promisc: 'True'
-    ssid: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1392, 860.0]
-    rotation: 0
-    state: enabled
-- name: analog_quadrature_demod_cf_0_0
-  id: analog_quadrature_demod_cf
+- name: analog_agc2_xx_0
+  id: analog_agc2_xx
   parameters:
     affinity: ''
     alias: ''
+    attack_rate: 1e-3
     comment: ''
-    gain: '1.2'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1280, 596.0]
-    rotation: 0
-    state: enabled
-- name: analog_quadrature_demod_cf_0_0_0
-  id: analog_quadrature_demod_cf
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    gain: '0.9'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [576, 460.0]
-    rotation: 0
-    state: enabled
-- name: analog_quadrature_demod_cf_0_0_0_0
-  id: analog_quadrature_demod_cf
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
+    decay_rate: 1e-3
     gain: '1.0'
+    max_gain: '65536'
     maxoutbuf: '0'
     minoutbuf: '0'
+    reference: '0.5'
+    type: complex
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [496, 596.0]
+    coordinate: [264, 476.0]
+    rotation: 0
+    state: enabled
+- name: analog_agc2_xx_0_0
+  id: analog_agc2_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    attack_rate: '0.01'
+    comment: ''
+    decay_rate: '0.001'
+    gain: '1.0'
+    max_gain: '65536'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    reference: '0.015'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [712, 476.0]
     rotation: 0
     state: enabled
 - name: antenna
@@ -152,7 +199,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [904, 12.0]
+    coordinate: [808, 20.0]
     rotation: 0
     state: enabled
 - name: baudrate
@@ -169,7 +216,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1496, 12.0]
+    coordinate: [1368, 20.0]
     rotation: 0
     state: enabled
 - name: bb_freq
@@ -186,82 +233,43 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1976, 156.0]
+    coordinate: [1680, 172.0]
     rotation: 0
     state: enabled
-- name: blocks_delay_0
-  id: blocks_delay
+- name: blocks_complex_to_real_0
+  id: blocks_complex_to_real
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    delay: 1024//2
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_ports: '1'
-    type: complex
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [536, 524.0]
+    coordinate: [1312, 512.0]
     rotation: 0
     state: enabled
-- name: blocks_moving_average_xx_0
-  id: blocks_moving_average_xx
+- name: blocks_rotator_cc_0_0
+  id: blocks_rotator_cc
   parameters:
     affinity: ''
     alias: ''
-    comment: ''
-    length: '1024'
-    max_iter: '4096'
+    comment: 'Add a frequency offset equal the baudrate
+
+      to move the audio representation of the
+
+      signal to the audable frequencies'
     maxoutbuf: '0'
     minoutbuf: '0'
-    scale: 1.0/1024.0
-    type: float
-    vlen: '1'
+    phase_inc: 2.0 * math.pi * (baudrate / audio_samp_rate)
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [648, 572.0]
-    rotation: 0
-    state: enabled
-- name: blocks_multiply_xx_0
-  id: blocks_multiply_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '2'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [968, 528.0]
-    rotation: 0
-    state: enabled
-- name: blocks_vco_c_0
-  id: blocks_vco_c
-  parameters:
-    affinity: ''
-    alias: ''
-    amplitude: '1.0'
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    samp_rate: baudrate*decimation
-    sensitivity: -baudrate*decimation
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [800, 580.0]
+    coordinate: [1096, 508.0]
     rotation: 0
     state: enabled
 - name: bw
@@ -280,43 +288,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1344, 12.0]
-    rotation: 0
-    state: enabled
-- name: dc_blocker_xx_0
-  id: dc_blocker_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    length: '1024'
-    long_form: 'True'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: ff
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1624, 588.0]
-    rotation: 0
-    state: enabled
-- name: dc_blocker_xx_0_0
-  id: dc_blocker_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    length: '1024'
-    long_form: 'True'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: ff
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [984, 452.0]
+    coordinate: [1168, 20.0]
     rotation: 0
     state: enabled
 - name: dc_removal
@@ -333,7 +305,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1816, 156.0]
+    coordinate: [1528, 172.0]
     rotation: 0
     state: enabled
 - name: decoded_data_file_path
@@ -350,7 +322,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 860.0]
+    coordinate: [40, 908.0]
     rotation: 0
     state: enabled
 - name: dev_args
@@ -367,44 +339,51 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [448, 12.0]
+    coordinate: [360, 12.0]
     rotation: 0
     state: enabled
-- name: digital_binary_slicer_fb_0
-  id: digital_binary_slicer_fb
+- name: digital_constellation_receiver_cb_0
+  id: digital_constellation_receiver_cb
   parameters:
     affinity: ''
     alias: ''
     comment: ''
+    constellation: bpsk_constellation
+    fmax: '0.25'
+    fmin: '-0.25'
+    loop_bw: 2.0 * math.pi/100.0
     maxoutbuf: '0'
     minoutbuf: '0'
+    showports: 'True'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1480, 752.0]
-    rotation: 180
+    coordinate: [1064, 656.0]
+    rotation: 0
     state: enabled
-- name: digital_clock_recovery_mm_xx_0
-  id: digital_clock_recovery_mm_xx
+- name: digital_pfb_clock_sync_xxx_0
+  id: digital_pfb_clock_sync_xxx
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    gain_mu: 0.5/8.0
-    gain_omega: 2 * math.pi / 100
+    filter_size: nfilts
+    init_phase: nfilts/2
+    loop_bw: 2.0 * math.pi/100.0
+    max_dev: '1.5'
     maxoutbuf: '0'
     minoutbuf: '0'
-    mu: '0.5'
-    omega: '2'
-    omega_relative_limit: '0.01'
-    type: float
+    osps: '1'
+    sps: sps
+    taps: rrc_taps
+    type: ccf
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1608, 716.0]
-    rotation: 180
+    coordinate: [808, 660.0]
+    rotation: 0
     state: enabled
 - name: doppler_correction_per_sec
   id: parameter
@@ -420,7 +399,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [176, 860.0]
+    coordinate: [216, 908.0]
     rotation: 0
     state: enabled
 - name: enable_iq_dump
@@ -437,7 +416,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [264, 780.0]
+    coordinate: [256, 828.0]
+    rotation: 0
+    state: enabled
+- name: excess_bw
+  id: parameter
+  parameters:
+    alias: ''
+    comment: 'The BPSK excess bandwidth setup.
+
+      Used in filtering.'
+    hide: none
+    label: ''
+    short_id: ''
+    type: eng_float
+    value: '0.5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [760, 828.0]
     rotation: 0
     state: enabled
 - name: file_path
@@ -454,9 +452,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [160, 780.0]
+    coordinate: [160, 828.0]
     rotation: 180
     state: enabled
+- name: framing
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: the framing scheme to use [ax25]
+    short_id: ''
+    type: str
+    value: '"ax25"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1040, 276.0]
+    rotation: 0
+    state: true
 - name: gain
   id: parameter
   parameters:
@@ -472,7 +487,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1176, 12.0]
+    coordinate: [1056, 20.0]
     rotation: 0
     state: enabled
 - name: gain_mode
@@ -493,7 +508,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1008, 12.0]
+    coordinate: [896, 20.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -506,7 +521,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 164.0]
+    coordinate: [7, 187]
     rotation: 0
     state: enabled
 - name: iq_file_path
@@ -523,7 +538,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [408, 780.0]
+    coordinate: [368, 828.0]
     rotation: 0
     state: enabled
 - name: lo_offset
@@ -542,7 +557,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [816, 12.0]
+    coordinate: [728, 20.0]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0
@@ -552,21 +567,21 @@ blocks:
     alias: ''
     beta: '6.76'
     comment: ''
-    cutoff_freq: 0.625 * baudrate
-    decim: decimation // 2
+    cutoff_freq: baudrate/2 + excess_bw *baudrate/2 + abs(max_cfo)
+    decim: decimation // sps
     gain: '1'
     interp: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: baudrate*decimation
     type: fir_filter_ccf
-    width: baudrate / 8.0
+    width: baudrate / 10.0
     win: firdes.WIN_HAMMING
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1104, 548.0]
+    coordinate: [416, 660.0]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0_0
@@ -575,23 +590,41 @@ blocks:
     affinity: ''
     alias: ''
     beta: '6.76'
-    comment: "Perform a relaxed filter to increase \nthe performance of the auto frequency\n\
-      correction"
-    cutoff_freq: baudrate*1.25
+    comment: ''
+    cutoff_freq: ((1.0 + excess_bw) * baudrate/2.0) + min(baudrate, abs(max_cfo))
     decim: '1'
     gain: '1'
     interp: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
-    samp_rate: baudrate*decimation
+    samp_rate: audio_samp_rate
     type: fir_filter_ccf
-    width: baudrate / 2.0
+    width: baudrate / 10.0
     win: firdes.WIN_HAMMING
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 548.0]
+    coordinate: [904, 460.0]
+    rotation: 0
+    state: enabled
+- name: max_cfo
+  id: parameter
+  parameters:
+    alias: ''
+    comment: "The maximum offset allowed from the carrier.\nUsed for filtering. Larger\
+      \ values allow decoding\nof frames with large frequency drifts,\n but degrades\
+      \  reception performance."
+    hide: none
+    label: ''
+    short_id: ''
+    type: eng_float
+    value: '2000.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [768, 948.0]
     rotation: 0
     state: enabled
 - name: other_settings
@@ -608,10 +641,10 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1664, 156.0]
+    coordinate: [1376, 172.0]
     rotation: 0
     state: enabled
-- name: pfb_arb_resampler_xxx_1
+- name: pfb_arb_resampler_xxx_0
   id: pfb_arb_resampler_xxx
   parameters:
     affinity: ''
@@ -621,17 +654,17 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     nfilts: '32'
-    rrate: audio_samp_rate / (baudrate*decimation)
+    rrate: audio_samp_rate/(baudrate*decimation)
     samp_delay: '0'
     taps: ''
-    type: fff
+    type: ccf
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 436.0]
+    coordinate: [464, 484.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: ppm
   id: parameter
   parameters:
@@ -648,7 +681,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1856, 12.0]
+    coordinate: [1568, 20.0]
     rotation: 0
     state: enabled
 - name: rigctl_port
@@ -665,7 +698,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [408, 868.0]
+    coordinate: [368, 908.0]
     rotation: 0
     state: enabled
 - name: rx_freq
@@ -682,7 +715,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [736, 12.0]
+    coordinate: [648, 20.0]
     rotation: 0
     state: enabled
 - name: samp_rate_rx
@@ -699,7 +732,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [584, 12.0]
+    coordinate: [488, 12.0]
     rotation: 0
     state: enabled
 - name: satnogs_doppler_compensation_0
@@ -720,7 +753,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [568, 204.0]
+    coordinate: [552, 172.0]
     rotation: 0
     state: true
 - name: satnogs_frame_decoder_0_0
@@ -729,7 +762,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    decoder_object: variable_ax25_decoder_0
+    decoder_object: available_framings[framing]
     itype: byte
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -738,26 +771,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1216, 712.0]
-    rotation: 180
-    state: enabled
-- name: satnogs_frame_decoder_0_0_0
-  id: satnogs_frame_decoder
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    decoder_object: variable_ax25_decoder_0_0
-    itype: byte
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1216, 784.0]
-    rotation: 180
+    coordinate: [1336, 696.0]
+    rotation: 0
     state: enabled
 - name: satnogs_frame_file_sink_0_1_0
   id: satnogs_frame_file_sink
@@ -771,10 +786,10 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [816, 788.0]
-    rotation: 180
+    coordinate: [1720, 660.0]
+    rotation: 0
     state: enabled
-- name: satnogs_iq_sink_0
+- name: satnogs_iq_sink_0_0
   id: satnogs_iq_sink
   parameters:
     activate: enable_iq_dump
@@ -788,7 +803,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 580.0]
+    coordinate: [16, 556.0]
     rotation: 180
     state: enabled
 - name: satnogs_json_converter_0
@@ -804,8 +819,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1040, 756.0]
-    rotation: 180
+    coordinate: [1536, 708.0]
+    rotation: 0
     state: true
 - name: satnogs_ogg_encoder_0
   id: satnogs_ogg_encoder
@@ -820,7 +835,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1152, 444.0]
+    coordinate: [1472, 492.0]
     rotation: 0
     state: enabled
 - name: satnogs_tcp_rigctl_msg_source_0
@@ -840,7 +855,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [288, 372.0]
+    coordinate: [256, 340.0]
     rotation: 0
     state: enabled
 - name: satnogs_udp_msg_sink_0_0
@@ -856,10 +871,10 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [816, 708.0]
-    rotation: 180
+    coordinate: [1720, 724.0]
+    rotation: 0
     state: enabled
-- name: satnogs_waterfall_sink_0
+- name: satnogs_waterfall_sink_0_0
   id: satnogs_waterfall_sink
   parameters:
     affinity: ''
@@ -875,7 +890,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 388.0]
+    coordinate: [16, 380.0]
     rotation: 180
     state: enabled
 - name: soapy_rx_device
@@ -892,10 +907,10 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [336, 12.0]
+    coordinate: [232, 20.0]
     rotation: 0
     state: enabled
-- name: soapy_source_0_0
+- name: soapy_source_0
   id: soapy_source
   parameters:
     affinity: ''
@@ -961,7 +976,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 132.0]
+    coordinate: [248, 100.0]
     rotation: 0
     state: true
 - name: stream_args
@@ -978,7 +993,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1320, 156.0]
+    coordinate: [1040, 172.0]
     rotation: 0
     state: enabled
 - name: tune_args
@@ -995,7 +1010,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1496, 156.0]
+    coordinate: [1216, 172.0]
     rotation: 0
     state: enabled
 - name: udp_IP
@@ -1012,7 +1027,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [512, 780.0]
+    coordinate: [472, 828.0]
     rotation: 0
     state: enabled
 - name: udp_port
@@ -1029,7 +1044,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [512, 868.0]
+    coordinate: [464, 908.0]
     rotation: 0
     state: enabled
 - name: virtual_sink_0
@@ -1042,7 +1057,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [784, 244.0]
+    coordinate: [784, 212.0]
     rotation: 0
     state: true
 - name: virtual_source_0
@@ -1055,7 +1070,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 524.0]
+    coordinate: [16, 508.0]
     rotation: 0
     state: true
 - name: waterfall_file_path
@@ -1072,38 +1087,30 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 780.0]
+    coordinate: [8, 828.0]
     rotation: 0
     state: enabled
 
 connections:
-- [analog_quadrature_demod_cf_0_0, '0', dc_blocker_xx_0, '0']
-- [analog_quadrature_demod_cf_0_0_0, '0', pfb_arb_resampler_xxx_1, '0']
-- [analog_quadrature_demod_cf_0_0_0_0, '0', blocks_moving_average_xx_0, '0']
-- [blocks_delay_0, '0', blocks_multiply_xx_0, '0']
-- [blocks_moving_average_xx_0, '0', blocks_vco_c_0, '0']
-- [blocks_multiply_xx_0, '0', low_pass_filter_0, '0']
-- [blocks_vco_c_0, '0', blocks_multiply_xx_0, '1']
-- [dc_blocker_xx_0, '0', digital_clock_recovery_mm_xx_0, '0']
-- [dc_blocker_xx_0_0, '0', satnogs_ogg_encoder_0, '0']
-- [digital_binary_slicer_fb_0, '0', satnogs_frame_decoder_0_0, '0']
-- [digital_binary_slicer_fb_0, '0', satnogs_frame_decoder_0_0_0, '0']
-- [digital_clock_recovery_mm_xx_0, '0', digital_binary_slicer_fb_0, '0']
-- [low_pass_filter_0, '0', analog_quadrature_demod_cf_0_0, '0']
-- [low_pass_filter_0_0, '0', analog_quadrature_demod_cf_0_0_0_0, '0']
-- [pfb_arb_resampler_xxx_1, '0', dc_blocker_xx_0_0, '0']
+- [analog_agc2_xx_0, '0', low_pass_filter_0, '0']
+- [analog_agc2_xx_0, '0', pfb_arb_resampler_xxx_0, '0']
+- [analog_agc2_xx_0_0, '0', low_pass_filter_0_0, '0']
+- [blocks_complex_to_real_0, '0', satnogs_ogg_encoder_0, '0']
+- [blocks_rotator_cc_0_0, '0', blocks_complex_to_real_0, '0']
+- [digital_constellation_receiver_cb_0, '0', satnogs_frame_decoder_0_0, '0']
+- [digital_pfb_clock_sync_xxx_0, '0', digital_constellation_receiver_cb_0, '0']
+- [low_pass_filter_0, '0', digital_pfb_clock_sync_xxx_0, '0']
+- [low_pass_filter_0_0, '0', blocks_rotator_cc_0_0, '0']
+- [pfb_arb_resampler_xxx_0, '0', analog_agc2_xx_0_0, '0']
 - [satnogs_doppler_compensation_0, '0', virtual_sink_0, '0']
 - [satnogs_frame_decoder_0_0, out, satnogs_json_converter_0, in]
-- [satnogs_frame_decoder_0_0_0, out, satnogs_json_converter_0, in]
 - [satnogs_json_converter_0, out, satnogs_frame_file_sink_0_1_0, frame]
 - [satnogs_json_converter_0, out, satnogs_udp_msg_sink_0_0, in]
 - [satnogs_tcp_rigctl_msg_source_0, freq, satnogs_doppler_compensation_0, doppler]
-- [soapy_source_0_0, '0', satnogs_doppler_compensation_0, '0']
-- [virtual_source_0, '0', analog_quadrature_demod_cf_0_0_0, '0']
-- [virtual_source_0, '0', blocks_delay_0, '0']
-- [virtual_source_0, '0', low_pass_filter_0_0, '0']
-- [virtual_source_0, '0', satnogs_iq_sink_0, '0']
-- [virtual_source_0, '0', satnogs_waterfall_sink_0, '0']
+- [soapy_source_0, '0', satnogs_doppler_compensation_0, '0']
+- [virtual_source_0, '0', analog_agc2_xx_0, '0']
+- [virtual_source_0, '0', satnogs_iq_sink_0_0, '0']
+- [virtual_source_0, '0', satnogs_waterfall_sink_0_0, '0']
 
 metadata:
   file_format: 1
