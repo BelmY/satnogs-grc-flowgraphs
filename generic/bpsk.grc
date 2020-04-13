@@ -591,7 +591,8 @@ blocks:
     alias: ''
     beta: '6.76'
     comment: ''
-    cutoff_freq: ((1.0 + excess_bw) * baudrate/2.0) + min(baudrate, abs(max_cfo))
+    cutoff_freq: min(((1.0 + excess_bw) * baudrate/2.0) + min(baudrate, abs(max_cfo)),
+      0.42*audio_samp_rate)
     decim: '1'
     gain: '1'
     interp: '1'
@@ -599,7 +600,7 @@ blocks:
     minoutbuf: '0'
     samp_rate: audio_samp_rate
     type: fir_filter_ccf
-    width: baudrate / 10.0
+    width: baudrate / 10.0 if baudrate < audio_samp_rate / 2 else 0.05 * audio_samp_rate
     win: firdes.WIN_HAMMING
   states:
     bus_sink: false
