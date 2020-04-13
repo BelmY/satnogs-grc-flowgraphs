@@ -154,7 +154,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [576, 460.0]
+    coordinate: [1280, 476.0]
     rotation: 0
     state: enabled
 - name: analog_quadrature_demod_cf_0_0_0_0
@@ -351,7 +351,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [984, 452.0]
+    coordinate: [1656, 468.0]
     rotation: 0
     state: enabled
 - name: dc_removal
@@ -681,7 +681,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 436.0]
+    coordinate: [1432, 452.0]
     rotation: 0
     state: true
 - name: ppm
@@ -854,7 +854,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1152, 444.0]
+    coordinate: [1832, 460.0]
     rotation: 0
     state: enabled
 - name: satnogs_tcp_rigctl_msg_source_0
@@ -1123,6 +1123,7 @@ connections:
 - [digital_binary_slicer_fb_0, '0', satnogs_frame_decoder_0_0, '0']
 - [digital_clock_recovery_mm_xx_0, '0', digital_binary_slicer_fb_0, '0']
 - [low_pass_filter_0, '0', analog_quadrature_demod_cf_0_0, '0']
+- [low_pass_filter_0, '0', analog_quadrature_demod_cf_0_0_0, '0']
 - [low_pass_filter_0_0, '0', analog_quadrature_demod_cf_0_0_0_0, '0']
 - [pfb_arb_resampler_xxx_1, '0', dc_blocker_xx_0_0, '0']
 - [satnogs_doppler_compensation_0, '0', virtual_sink_0, '0']
@@ -1131,7 +1132,6 @@ connections:
 - [satnogs_json_converter_0, out, satnogs_udp_msg_sink_0_0, in]
 - [satnogs_tcp_rigctl_msg_source_0, freq, satnogs_doppler_compensation_0, doppler]
 - [soapy_source_0_0, '0', satnogs_doppler_compensation_0, '0']
-- [virtual_source_0, '0', analog_quadrature_demod_cf_0_0_0, '0']
 - [virtual_source_0, '0', blocks_delay_0, '0']
 - [virtual_source_0, '0', low_pass_filter_0_0, '0']
 - [virtual_source_0, '0', satnogs_iq_sink_0, '0']
