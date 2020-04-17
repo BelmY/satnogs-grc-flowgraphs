@@ -21,7 +21,7 @@ When using those repositories, the dependencies can be installed with:
 sudo apt-get install build-essential gnuradio-dev gr-satnogs
 ```
 
-### Installation from Souce
+### Installation from Source
 
 ```
 git clone https://gitlab.com/librespacefoundation/satnogs/satnogs-flowgraphs.git
