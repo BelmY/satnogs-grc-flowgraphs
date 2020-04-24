@@ -90,6 +90,18 @@ blocks:
     coordinate: [1280, 20.0]
     rotation: 0
     state: true
+- name: if_freq
+  id: variable
+  parameters:
+    comment: ''
+    value: '12000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1313, 322]
+    rotation: 0
+    state: true
 - name: nfilts
   id: variable
   parameters:
@@ -264,7 +276,7 @@ blocks:
       signal to the audable frequencies'
     maxoutbuf: '0'
     minoutbuf: '0'
-    phase_inc: 2.0 * math.pi * (baudrate / audio_samp_rate)
+    phase_inc: 2.0 * math.pi * (if_freq / audio_samp_rate)
   states:
     bus_sink: false
     bus_source: false
@@ -591,8 +603,7 @@ blocks:
     alias: ''
     beta: '6.76'
     comment: ''
-    cutoff_freq: min(((1.0 + excess_bw) * baudrate/2.0) + min(baudrate, abs(max_cfo)),
-      0.42*audio_samp_rate)
+    cutoff_freq: 0.42*audio_samp_rate/2.0
     decim: '1'
     gain: '1'
     interp: '1'
@@ -600,7 +611,7 @@ blocks:
     minoutbuf: '0'
     samp_rate: audio_samp_rate
     type: fir_filter_ccf
-    width: baudrate / 10.0 if baudrate < audio_samp_rate / 2 else 0.05 * audio_samp_rate
+    width: 0.05 * audio_samp_rate
     win: firdes.WIN_HAMMING
   states:
     bus_sink: false
