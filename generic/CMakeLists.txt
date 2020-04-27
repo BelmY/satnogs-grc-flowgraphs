@@ -23,6 +23,7 @@ set(flowgraphs
     bpsk.grc
     cw_decoder.grc
     example_flowgraph.grc
+    fm.grc
     fsk.grc
     iq_receiver.grc
     sstv_pd120_demod.grc
