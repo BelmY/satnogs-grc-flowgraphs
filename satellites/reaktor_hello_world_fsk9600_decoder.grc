@@ -620,7 +620,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     nfilts: '32'
-    rrate: audio_samp_rate / (baudrate*decimation)
+    rrate: audio_samp_rate /( (baudrate*decimation) / (decimation // 2))
     samp_delay: '0'
     taps: ''
     type: fff
