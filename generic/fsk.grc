@@ -73,7 +73,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1760, 12.0]
+    coordinate: [1760, 12]
     rotation: 0
     state: true
 - name: variable_ax100_mode5_decoder_0
@@ -351,7 +351,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1656, 468.0]
+    coordinate: [1701, 467]
     rotation: 0
     state: enabled
 - name: dc_removal
@@ -618,7 +618,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1104, 548.0]
+    coordinate: [1104, 548]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0_0
@@ -673,7 +673,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     nfilts: '32'
-    rrate: audio_samp_rate / (baudrate*decimation)
+    rrate: (audio_samp_rate) / (baudrate*2)
     samp_delay: '0'
     taps: ''
     type: fff
@@ -681,7 +681,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1432, 452.0]
+    coordinate: [1432, 452]
     rotation: 0
     state: true
 - name: ppm
@@ -854,7 +854,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1832, 460.0]
+    coordinate: [1867, 460]
     rotation: 0
     state: enabled
 - name: satnogs_tcp_rigctl_msg_source_0
