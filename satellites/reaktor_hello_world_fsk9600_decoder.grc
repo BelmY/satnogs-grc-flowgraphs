@@ -61,6 +61,7 @@ blocks:
   parameters:
     comment: ''
     crc: satnogs.crc.CRC16_IBM
+    drop_invalid: 'True'
     frame_len: '256'
     preamble: '[0x55, 0x55, 0x55, 0x55, 0x55]'
     preamble_thrsh: '2'
@@ -80,13 +81,15 @@ blocks:
   parameters:
     comment: ''
     mask: '0x21'
+    msb: 'True'
     order: '8'
     seed: '0x1FF'
+    self_sync: 'False'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [920, 1012.0]
+    coordinate: [920, 980.0]
     rotation: 0
     state: enabled
 - name: analog_quadrature_demod_cf_0_0

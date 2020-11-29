@@ -145,6 +145,7 @@ blocks:
     comment: ''
     crc_check: 'True'
     descrambling: 'True'
+    error_correction: 'False'
     frame_len: '1024'
     promisc: 'True'
     ssid: '0'

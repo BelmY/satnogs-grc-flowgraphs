@@ -86,7 +86,7 @@ blocks:
     rs: 'True'
     sync_thrsh: '3'
     sync_word: '[0x93, 0x0B, 0x51, 0xDE]'
-    whitening: ' satnogs.whitening.make_ccsds()'
+    whitening: ' satnogs.whitening.make_ccsds(True)'
   states:
     bus_sink: false
     bus_source: false
@@ -100,7 +100,7 @@ blocks:
     comment: ''
     crc: satnogs.crc.CRC32_C
     descramble: 'True'
-    whitening: satnogs.whitening_make_ccsds()
+    whitening: satnogs.whitening_make_ccsds(True)
   states:
     bus_sink: false
     bus_source: false
@@ -115,6 +115,7 @@ blocks:
     comment: ''
     crc_check: 'True'
     descrambling: 'True'
+    error_correction: 'False'
     frame_len: '1024'
     promisc: 'True'
     ssid: '0'
